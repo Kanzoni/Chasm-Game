@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Horror Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #202020;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #000000;
+            border-radius: 5px;
+        }
+
+        .options {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .options li {
+            margin-bottom: 10px;       
+        }
+
+        .options a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .options a:hover {
+            text-decoration: underline;
+        }
+        p {
+            color: #fff;
+        }
+        #buttonPLay {
+            text-align: center;
+        }
+    </style>
+    <link rel="stylesheet" href="stylesGLITCH.css">
+    <link rel="stylesheet" href="stylesPLAY.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <h1 class="text" data-text="Chasm">
+               Chasm
+            </h1>
+        </div>
+
+        <br><br><br>
+
+        <p id="story"></p><br>
+        <p id="Choices">Choices:</p>
+        <ul id="options" class="options"></ul>
+    </div>
+    <br><br>
+
+        <a href="Game.html" class="button">RESET</a>
+
+    <br><br>
+
+        <a href="Chasm_Main.html" class="button">GO BACK</a>
+
+
+    <script>
+        var story = 'You are trapped in a very deep Chasm...';
+        var choices = [
+            {
+                story: 'You decide to explore the deepest parts of the chasm...',
+                choices: [
+                    {
+                        story: 'You feel very hot and discovered lava in the bottom below a hole.',
+                        choices: [
+                            {
+                                story: 'You slipped and fell on the lava.',
+                                choices: []
+                            },
+                            {
+                                story: 'You attempt to run, but your legs refuse to move!',
+                                choices: []
+                            }
+                        ]
+                    },
+                    {
+                        story: 'You find a hidden passage leading to a treasure room.',
+                        choices: [
+                            {
+                                story: 'You grab the treasure and make your escape!',
+                                choices: []
+                            },
+                            {
+                                story: 'You find a secret trapdoor that leads to your doom.',
+                                choices: []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                story: 'You decide to search for an exit...',
+                choices: [
+                    {
+                        story: 'You discover a trapdoor, leading to a pitch-black basement.',
+                        choices: [
+                            {
+                                story: '--You decide to go down, feeling a presence watching you.',
+                                choices: []
+                            },
+                            {
+                                story: '--You close the trapdoor and hope for the best.',
+                                choices: []
+                            }
+                        ]
+                    },
+                    {
+                        story: 'You find a door leading outside, but the night air feels ominous...',
+                        choices: [
+                            {
+                                story: 'You decided to stay inside.',
+                                choices: []
+                            },
+                            {
+                                story: 'You decided to face your fears and venture out.',
+                                choices: []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        function updateStory() {
+            var html = '';
+            choices.forEach(function(choice, index) {
+                html += '<li><a href="#" onclick="event.preventDefault(); makeChoice(' + index + ');">' + choice.story + '</a></li>';
+            });
+            document.getElementById('options').innerHTML = html;
+            document.getElementById('story').innerHTML = story;
+        }
+
+        function makeChoice(choiceIndex) {
+            var choice = choices[choiceIndex];
+            story += ' ' + choice.story;
+            choices = choice.choices;
+            updateStory();
+        }
+
+        updateStory();
+    </script>
+</body>
+</html>
